@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "rag-eval"
+version = "0.1.0"
+description = "RAG評検証"
+authors = ["kohsaku Nishida <kohsaku.nishida@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+google-genai = "^1.13.0"
+langchain-google-genai = "^2.1.4"
+python-dotenv = "^1.1.0"
+ragas = "^0.2.15"
+langchain-chroma = "^0.2.3"
+protobuf = "3.20.3"
+setuptools = "^80.3.1"
+pypdf = "^5.4.0"
+cryptography = "^44.0.3"
+langchain-community = "^0.3.23"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
