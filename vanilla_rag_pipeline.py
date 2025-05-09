@@ -55,7 +55,7 @@ def main():
     # 3. RAG評価システムで評価
     print("\nステップ 3: RAG評価システムで評価")
     success = run_command([
-        "python", "vanilla_rag_eval.py",
+        "python", "ragas_eval.py",
         "--results_csv", args.results_path,
         "--output", args.eval_path
     ])
