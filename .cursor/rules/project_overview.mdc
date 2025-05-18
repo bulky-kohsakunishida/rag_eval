@@ -1,0 +1,33 @@
+---
+description: RAG評価プロジェクトの概要、目的、アーキテクチャ、主要コンポーネントの説明
+type: Always
+---
+
+# RAG評価プロジェクト概要
+
+## プロジェクトの説明
+- このプロジェクトは、RAG（Retrieval-Augmented Generation）システムの性能評価を行います。
+- RAGASフレームワークを使用して複数のメトリクスで評価します。
+- RAG手法は`Vanilla RAG`や`RAGを利用しないLLMのみの手法`をベースラインとして、各種のRAG手法との評価メトリクスの比較を行うことが目的です。
+- 比較対象のRAG手法は、Hybrid検索、Hybrid検索+reranck,LightRAGなど
+- 各RAG手法はRAGASフレームワークで評価指標値を求めるためのデータ(retrived_contexts,response)を取得できるようにします。
+- user_input,responseはqa.csvに格納されています。
+- LLMについてはまず、Geminiベースで実装し、今後別のモデルへの拡張も行う
+
+## コア原則
+- **再現性**: すべての評価は再現可能であるべきです
+- **透明性**: 評価手法と結果は明確に文書化されるべきです
+- **比較可能性**: 異なるRAGモデル間で一貫した比較が可能であるべきです
+
+## 主要なコンポーネント
+- **データ処理**: PDF文書の解析とチャンク化
+- **ベクトルDB**: 文書チャンクのインデックス作成と検索
+- **LLM統合**: Gemini 2.0 FlashやGPT-4oなど様々なLLMの利用
+- **評価メトリクス**: Faithfulness、AnswerRelevancy、ContextRelevance、ContextRecallなど
+- **カスタム評価**: AspectCriticを使用した特定側面（簡潔さ、正確さ、完全性）の評価
+
+## 環境
+- pythonのライブラリ環境は poetryを利用している
+
+## 参照ドキュメント
+@Langchain 
