@@ -51,7 +51,7 @@ def create_hybrid_db(chunks, db_path):
 def main():
     parser = argparse.ArgumentParser(description="PDFをハイブリッド検索用DBに変換するツール")
     parser.add_argument("--pdf_path", required=True, help="PDFファイルのパス")
-    parser.add_argument("--db_path", default="./hybrid_rag_db", help="DBの保存先")
+    parser.add_argument("--db_path", default="./hybrid_rag_chroma_db", help="DBの保存先")
     
     args = parser.parse_args()
     

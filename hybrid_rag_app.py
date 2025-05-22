@@ -318,7 +318,7 @@ def resume_from_temp(qa_chain, csv_path, output_path, temp_path, max_retries=5):
 
 def main():
     parser = argparse.ArgumentParser(description="ハイブリッドRAGアプリケーション")
-    parser.add_argument("--db_path", default="./hybrid_rag_db", help="ベクトルDBのパス")
+    parser.add_argument("--db_path", default="./hybrid_rag_chroma_db", help="ベクトルDBのパス")
     parser.add_argument("--qa_csv", default="qa.csv", help="質問回答のCSVファイル")
     parser.add_argument("--output", default="hybrid_rag_results.csv", help="結果の出力先")
     parser.add_argument("--interactive", action="store_true", help="対話モードで実行")
