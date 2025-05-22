@@ -28,8 +28,10 @@ if not api_key:
     raise ValueError("GOOGLE_API_KEY が環境変数に設定されていません。.env ファイルを確認してください。")
 
 # Gemini 2.0 Flash の利用制限定数
-GEMINI_FLASH_RPM = 15  # 1分あたりの最大リクエスト数
-GEMINI_FLASH_RPD = 1500  # 1日あたりの最大リクエスト数
+# GEMINI_FLASH_RPM = 15  # 1分あたりの最大リクエスト数
+# GEMINI_FLASH_RPD = 1500  # 1日あたりの最大リクエスト数
+GEMINI_FLASH_RPM = 60  # 例：1分あたりの最大リクエスト数
+GEMINI_FLASH_RPD = 10000  # 例：1日あたりの最大リクエスト数
 DEFAULT_REQUEST_INTERVAL = 60 / GEMINI_FLASH_RPM + 0.5  # 安全マージンを追加 (4.5秒)
 
 def load_hybrid_retriever(db_path: str, k: int = 3) -> MergerRetriever:
