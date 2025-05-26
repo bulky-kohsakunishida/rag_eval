@@ -195,7 +195,7 @@ def answer_question_with_retry(qa_chain, question, reranker_model_name: str, rer
             source_docs = result["source_documents"]
             
             # Rerank the source documents
-            reranked_source_docs = rerank_documents(question=question, documents=source_docs, model_name=reranker_model_name, top_n=rerank_top_n)
+            reranked_source_docs = rerank_documents(query=question, documents=source_docs, model_name=reranker_model_name, top_n=rerank_top_n)
             
             return answer, reranked_source_docs # Return reranked docs
             
@@ -277,6 +277,12 @@ def process_qa_csv(qa_chain, csv_path, output_path, reranker_model_name: str, re
     results_df.to_csv(output_path, index=False)
     print(f"結果を{output_path}に保存しました")
     
+    # 正常終了時は中間保存ファイルを削除
+    temp_file = f"{output_path}.temp"
+    if os.path.exists(temp_file):
+        os.remove(temp_file)
+        print(f"中間保存ファイル {temp_file} を削除しました")
+    
     return results_df
 
 def resume_from_temp(qa_chain, csv_path, output_path, temp_path, reranker_model_name: str, rerank_top_n: int, max_retries=5):
@@ -344,6 +350,11 @@ def resume_from_temp(qa_chain, csv_path, output_path, temp_path, reranker_model_
     results_df.to_csv(output_path, index=False)
     print(f"結果を{output_path}に保存しました")
     
+    # 正常終了時は中間保存ファイルを削除
+    if os.path.exists(temp_path):
+        os.remove(temp_path)
+        print(f"中間保存ファイル {temp_path} を削除しました")
+    
     return results_df
 
 def main():
@@ -357,7 +368,7 @@ def main():
     parser.add_argument("--timeout", type=int, default=60, help="APIリクエストのタイムアウト時間（秒）")
     parser.add_argument("--max_retries", type=int, default=5, help="エラー時の最大リトライ回数")
     parser.add_argument("--resume", action="store_true", help="前回の途中結果から再開する")
-    parser.add_argument("--reranker_model_name", default='cross-encoder/ms-marco-MiniLM-L-6-v2', 
+    parser.add_argument("--reranker_model_name", default='cross-encoder/ms-marco-MiniLM-L-12-v2', 
                         help="Name of the CrossEncoder model to use for reranking.")
     parser.add_argument("--rerank_top_n", type=int, default=3, 
                         help="Number of documents to keep after reranking.")

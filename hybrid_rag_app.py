@@ -247,6 +247,12 @@ def process_qa_csv(qa_chain, csv_path, output_path, max_retries=5):
     results_df.to_csv(output_path, index=False)
     print(f"結果を{output_path}に保存しました")
     
+    # 正常終了時は中間保存ファイルを削除
+    temp_file = f"{output_path}.temp"
+    if os.path.exists(temp_file):
+        os.remove(temp_file)
+        print(f"中間保存ファイル {temp_file} を削除しました")
+    
     return results_df
 
 def resume_from_temp(qa_chain, csv_path, output_path, temp_path, max_retries=5):
@@ -313,6 +319,11 @@ def resume_from_temp(qa_chain, csv_path, output_path, temp_path, max_retries=5):
     # CSVに保存
     results_df.to_csv(output_path, index=False)
     print(f"結果を{output_path}に保存しました")
+    
+    # 正常終了時は中間保存ファイルを削除
+    if os.path.exists(temp_path):
+        os.remove(temp_path)
+        print(f"中間保存ファイル {temp_path} を削除しました")
     
     return results_df
 
